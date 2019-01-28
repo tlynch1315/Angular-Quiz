@@ -88,21 +88,21 @@ app.factory('quizFactory', function() {
         for(var j = 0; j < incorrectAnswers.length; j++){
             var curr = incorrectAnswers[j].replace(/&quot;/g,'"');
             curr.replace(/&#039;/g,'"');
-            answers.push(curr);
+            answers.push(unescape(curr));
         }
         
-        ans = questions[i]['correct_answer'].replace(/&quot;/g,'"');
+        var ans = questions[i]['correct_answer'].replace(/&quot;/g,'"');
         ans.replace(/&#039;/g,'"');
-        answers.push(ans);
-        q = shuffle(answers)
+        answers.push(unescape(ans));
+        var q = shuffle(answers)
         
         var quest = questions[i]['question'].replace(/&quot;/g,'"');
         quest.replace(/&#039;/g,'"');
         
         questionsArray.push({
-            question : quest,
+            question : unescape(quest),
             options: q,
-            answer: q.indexOf(questions[i]['correct_answer'])
+            answer: q.indexOf(unescape(questions[i]['correct_answer']))
         })     
     }
     
